@@ -139,3 +139,69 @@ Abaixo, descrevo brevemente como cada prática sugerida ajudará a estabilizar o
 
 ---
 
+## 4. Anúncios de Contratação
+
+Abaixo estão os anúncios detalhados para as duas posições fundamentais na reestruturação da Local Eats:
+
+### 4.1 Vaga 1 – Analista de Qualidade de Software (QA)
+
+**Descrição da vaga**
+Buscamos um profissional de QA para liderar a implementação de uma cultura de testes na Local Eats. Você atuará em colaboração com desenvolvedores e analistas para identificar riscos, planejar testes e garantir que as funcionalidades entregues (Web e Mobile) atendam aos requisitos de qualidade e estabilidade.
+
+**Responsabilidades**
+* Planejar e executar casos de teste funcionais e exploratórios.
+* Identificar, registrar e monitorar a correção de defeitos (bugs).
+* Apoiar a equipe na definição de critérios de aceite para novas funcionalidades.
+* Realizar testes de regressão para garantir que novas atualizações não gerem falhas em funções antigas.
+
+**Requisitos obrigatórios**
+* Conhecimento sólido em metodologias de teste de software (caixa preta, fumaça, regressão).
+* Capacidade analítica para documentar defeitos de forma clara e objetiva.
+* Boa comunicação e proatividade para trabalhar em equipe.
+
+**Requisitos desejáveis**
+* Conhecimento em ferramentas de automação de testes (Cypress, Selenium ou similares).
+* Experiência com testes de API (Postman ou Insomnia).
+* Noções básicas de SQL para consulta em banco de dados.
+
+**Certificações desejáveis**
+* ISTQB – CTFL (Certified Tester Foundation Level).
+
+---
+
+### 4.2 Vaga 2 – Desenvolvedor Backend
+
+**Descrição da vaga**
+Estamos à procura de um Desenvolvedor Backend com foco em qualidade e robustez de código. Sua principal missão será garantir que a lógica de processamento de pedidos e buscas da Local Eats seja infalível, eliminando problemas de concorrência e inconsistência de dados.
+
+**Responsabilidades**
+* Desenvolver APIs escaláveis e seguras para as plataformas Web e Mobile.
+* Implementar e manter testes unitários e de integração em todas as entregas.
+* Investigar e corrigir falhas críticas de lógica (ex: pedidos duplicados).
+* Colaborar com o time de QA para garantir a estabilidade do sistema em produção.
+
+**Requisitos obrigatórios**
+* Sólida experiência em lógica de programação e linguagens backend (Node.js, Python ou C#).
+* Domínio de bancos de dados relacionais (SQL).
+* Mentalidade voltada para a prevenção de erros e escrita de código limpo (Clean Code).
+
+**Requisitos desejáveis**
+* Conhecimento em infraestrutura e containers (Docker).
+* Familiaridade com processos de CI/CD (integração e entrega contínua).
+* Conhecimento em padrões de projeto (Design Patterns).
+
+**Certificações desejáveis**
+* Certificações de linguagem específica (ex: Microsoft Certified, Oracle Java) ou cursos avançados em Arquitetura de Software.
+
+---
+
+## Considerações Finais
+
+### O que ficou de aprendizado
+Essa atividade deixou claro que qualidade não é um "acréscimo" ao software, mas a base que sustenta o negócio. Analisar o caso da Local Eats me mostrou que a técnica (como a ISO 25010) só funciona quando existe um processo organizado por trás. Aprendi que é muito mais eficiente gastar tempo revisando requisitos e regras de negócio no início do que passar noites corrigindo bugs críticos em produção que poderiam ter sido evitados com uma conversa simples.
+
+### Desafios de realizar o trabalho individualmente
+O maior desafio de tocar esse diagnóstico sozinho foi a necessidade de "mudar de papel" constantemente. Tive que me policiar para não olhar para os problemas apenas como um desenvolvedor que quer entregar rápido, mas também como um analista de QA que precisa ser cético e um gerente que se preocupa com a reputação da marca. Conseguir enxergar o todo sem o debate com uma equipe exige um nível de autocrítica bem maior para não deixar passar detalhes importantes.
+
+### O caminho para a evolução da startup
+Para a Local Eats sair do modo reativo, o segredo é profissionalizar a validação. A principal melhoria é descentralizar a qualidade: parar de achar que "alguém vai testar" e passar a usar critérios claros do que é uma tarefa pronta. Com um profissional de QA liderando a estratégia e os desenvolvedores cuidando da base do código, a startup consegue parar de apenas "sobreviver" aos eventos e começa a entregar um produto que realmente passa confiança para os lojistas e usuários.
