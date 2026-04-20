@@ -105,3 +105,37 @@ Para melhorar a estabilidade do sistema e a confiança dos usuários, sugiro a a
 4.  **Testes Exploratórios:** Reservar um tempo para navegar livremente pelo sistema como se fosse um usuário final. Isso ajuda a identificar problemas de usabilidade, telas confusas e falhas em diferentes modelos de smartphone que não foram previstos nos planos de teste.
 5.  **Criação de Critérios de Aceite:** Definir condições claras que uma tarefa deve cumprir para ser considerada "concluída" (Done). Por exemplo: "O sistema não deve permitir que o mesmo pedido seja processado duas vezes em menos de 1 minuto".
 
+### 3.1 Lista de práticas
+
+Para estruturar o processo de qualidade, estas são as práticas fundamentais recomendadas:
+
+* **Registro e Acompanhamento de Bugs (GitHub Issues):** * **Responsável:** Toda a equipe (QA liderando a triagem).
+    * **Impacto:** Garante que nenhum erro seja esquecido e permite priorizar o que é mais crítico para o negócio.
+* **Testes de Fumaça (Smoke Tests):**
+    * **Responsável:** QA e Desenvolvedores.
+    * **Impacto:** Validação rápida das funções vitais (login e pedido) em cada nova versão, evitando que o app "pare" totalmente em produção.
+* **Revisão de Requisitos (Static Testing):**
+    * **Responsável:** Analista de Sistemas e QA.
+    * **Impacto:** Identifica falhas de lógica (como a duplicidade de pedidos) antes do início do código, economizando tempo de desenvolvimento.
+* **Testes Exploratórios em Diferentes Dispositivos:**
+    * **Responsável:** QA.
+    * **Impacto:** Melhora a portabilidade do sistema, garantindo que o app funcione bem em diversos modelos de smartphone, como relatado pelos usuários.
+* **Definição de Critérios de Aceite (DoD):**
+    * **Responsável:** Analista de Sistemas e QA.
+    * **Impacto:** Alinha a expectativa entre o que foi pedido e o que foi entregue, reduzindo o retrabalho e a frustração da associação de comerciantes.
+
+### 3.2 Explicação das práticas
+
+Abaixo, descrevo brevemente como cada prática sugerida ajudará a estabilizar o sistema:
+
+**Prática 1: Revisão de Requisitos (Static Testing)**
+**Descrição:** Consiste em analisar as regras de negócio e a documentação antes do início da codificação. O objetivo é encontrar erros de lógica (como a falha que permite pedidos duplicados) ainda no papel. Corrigir um erro nesta fase é muito mais barato e rápido do que quando o código já foi escrito e enviado para produção.
+
+**Prática 2: Testes de Fumaça (Smoke Tests)**
+**Descrição:** É um conjunto rápido de testes que foca nas funcionalidades vitais do app, como fazer login, buscar um restaurante e finalizar um pagamento. Essa prática garante que as operações principais do Local Eats continuem funcionando após qualquer atualização, evitando que falhas críticas parem o sistema em horários de pico.
+
+**Prática 3: Registro e Acompanhamento de Bugs**
+**Descrição:** Trata-se da centralização de todos os problemas encontrados em uma ferramenta de gestão (como o GitHub Issues). Ao documentar os passos para reproduzir o erro e sua severidade, a equipe deixa de trabalhar no "caos" e passa a ter uma fila organizada de correções, garantindo que nenhum bug relatado pelo usuário seja esquecido.
+
+---
+
