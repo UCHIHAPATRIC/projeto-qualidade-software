@@ -195,7 +195,7 @@ Estamos à procura de um Desenvolvedor Backend com foco em qualidade e robustez 
 
 ---
 
-## Considerações Finais
+## 5. Conclusão da Equipe
 
 ### O que ficou de aprendizado
 Essa atividade deixou claro que qualidade não é um "acréscimo" ao software, mas a base que sustenta o negócio. Analisar o caso da Local Eats me mostrou que a técnica (como a ISO 25010) só funciona quando existe um processo organizado por trás. Aprendi que é muito mais eficiente gastar tempo revisando requisitos e regras de negócio no início do que passar noites corrigindo bugs críticos em produção que poderiam ter sido evitados com uma conversa simples.
