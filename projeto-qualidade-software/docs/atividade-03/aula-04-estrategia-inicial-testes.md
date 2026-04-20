@@ -1,6 +1,6 @@
 # Estratégia Inicial de Testes – LocalEats
 
-## 1. Funcionalidades Principais
+## 1. Funcionalidades
 
 Para esta estratégia inicial, selecionei as funcionalidades vitais para a operação do sistema:
 
