@@ -1,50 +1,67 @@
 # Diagnóstico de Qualidade – Startup Local Eats
 
+**Estudante:** Patric Morales Taborda  
+**Disciplina:** Qualidade de Software  
+**Atividade:** PBL – Diagnóstico Organizacional de QA  
+
+---
+
 ## 1. Diagnóstico da Situação Atual
 
-Após análise técnica do cenário da startup **Local Eats**, identifiquei que a organização passa por um momento de transição crítica. A ausência de processos formais de qualidade está impactando diretamente a operação e a confiança dos usuários.
+A startup **Local Eats** enfrenta um cenário de "caos operacional" típico de crescimentos acelerados sem processos de validação. A análise do contexto revela falhas críticas de **Confiabilidade** e **Adequação Funcional**.
 
-* **Problemas Críticos:** Erros de lógica (pedidos duplicados) e falhas funcionais graves em produção.
-* **Causa Raiz:** Inexistência de uma definição clara de "Pronto" (Definition of Done) e falta de validação de requisitos antes do início do desenvolvimento.
-* **Responsabilidade da Qualidade:** Atualmente, a qualidade é tratada de forma reativa. O objetivo deste diagnóstico é propor a migração para um modelo de **Responsabilidade Compartilhada**, onde a qualidade é integrada desde o início do ciclo de vida do software.
+* **Identificação de Papéis Atuais:** Provavelmente a equipe conta apenas com Desenvolvedores e um Gerente de Produto, sem uma figura dedicada à qualidade.
+* **Responsabilidade Atual:** A qualidade é tratada de forma reativa e nebulosa; não há um "dono" do processo de teste, o que permite que erros graves (como pedidos duplicados) cheguem ao usuário final.
+* **Impactos Negativos:** Quando as responsabilidades não estão claras, ocorre o "efeito espectador" (todos acham que o outro testou), gerando retrabalho, perda de credibilidade com os lojistas e frustração dos clientes.
+* **Conclusão:** A qualidade deve ser uma **responsabilidade compartilhada** por toda a equipe, com o QA atuando como facilitador e estrategista, e não apenas como um "executor de testes" ao final do processo.
 
-## 2. Papéis e Responsabilidades Propostos
+## 2. Papéis da Equipe
 
-Para estruturar a equipe de desenvolvimento da startup, proponho a definição dos seguintes papéis:
+Para profissionalizar o desenvolvimento, proponho a seguinte estrutura de papéis:
 
 | Nome do Papel | Principais Responsabilidades | Relação com a Qualidade |
 | :--- | :--- | :--- |
-| **QA / Analista de Qualidade** | Planejar e executar testes, gerir o ciclo de vida de bugs e validar critérios de aceite. | Garante que o software atende às expectativas do usuário final e às regras de negócio. |
-| **Desenvolvedor** | Escrever código limpo, realizar testes unitários e garantir a integração correta das funções. | Responsável pela integridade técnica e por evitar que bugs básicos cheguem ao ambiente de teste. |
-| **Analista de Sistemas** | Refinar requisitos, definir regras de negócio e validar protótipos com stakeholders. | Garante a "Qualidade de Design", evitando que o sistema seja construído com lógica errada. |
-| **DevOps** | Automatizar o pipeline de deploy (CI/CD) e monitorar a estabilidade do ambiente de produção. | Garante que a entrega seja estável e que o sistema tenha alta disponibilidade. |
+| **QA / Analista de Qualidade** | Planejar testes, gerir o ciclo de vida de bugs e validar critérios de aceite. | Atua como a voz do usuário e garante que o processo de QA seja seguido. |
+| **Desenvolvedor** | Escrever código limpo, realizar testes unitários e de integração. | Garante a qualidade técnica na base da pirâmide de testes (previne o bug na origem). |
+| **Analista de Sistemas** | Refinar requisitos, definir regras de negócio e validar protótipos. | Garante que o que está sendo construído resolve o problema certo (Qualidade de Requisito). |
+| **DevOps** | Automatizar o pipeline de deploy (CI/CD) e monitorar a saúde da produção. | Garante que o sistema esteja disponível e que a entrega seja estável e segura. |
 
-## 3. Práticas Básicas de QA Recomendadas
+## 3. Responsabilidades relacionadas à qualidade
 
-Para estancar os erros em produção de imediato, recomendo a implementação das seguintes práticas:
+Abaixo, defino as atividades essenciais e seus respectivos responsáveis:
 
-1.  **Revisão Estática (Static Testing):** Antes do início da codificação, o Analista e o QA devem revisar os requisitos para evitar erros lógicos (como o caso dos pedidos duplicados).
-2.  **Gestão Centralizada de Defeitos:** Utilizar o GitHub Issues para documentar cada erro encontrado, incluindo evidências, passos para reprodução e nível de severidade.
-3.  **Testes de Regressão Manual:** Antes de qualquer atualização em produção, realizar um roteiro rápido de testes nas funções críticas (login, busca e finalização de pedido).
-4.  **Definição de Critérios de Aceite:** Estabelecer condições claras que uma funcionalidade deve atender para ser considerada "concluída".
+* **Revisar requisitos e regras de negócio:** Analista de Sistemas e QA.
+* **Testar funcionalidades (Manual e Automático):** QA e Desenvolvedor.
+* **Registrar e acompanhar defeitos (Bugs):** Toda a equipe (liderada pelo QA).
+* **Validar funcionalidades antes da entrega (Homologação):** QA e Analista de Sistemas.
+* **Implementar e monitorar testes unitários:** Desenvolvedor.
 
-## 4. Anúncios de Contratação
+## 4. Práticas de QA Sugeridas
+
+Como consultoria, recomendo a adoção imediata destas 4 práticas:
+
+1.  **Registro e Acompanhamento de Bugs:** Utilização de uma ferramenta centralizada (ex: GitHub Issues) para documentar erros com passos para reprodução e severidade.
+2.  **Revisão de Funcionalidades (Definition of Done):** Nenhuma tarefa é considerada pronta sem passar por um checklist de qualidade pré-definido.
+3.  **Testes de Regressão Críticos:** Antes de qualquer deploy, validar o fluxo principal: Login -> Busca -> Pedido -> Pagamento.
+4.  **Testes Exploratórios:** Sessões semanais de uso livre do sistema para identificar comportamentos inesperados que não foram previstos nos casos de teste.
+
+## 5. Anúncios de Contratação
 
 ### Vaga 1: Analista de Qualidade de Software (QA)
 **Empresa:** Local Eats | **Local:** Porto Alegre – RS (Híbrido)
 
 **Sobre a vaga:**
-Buscamos um profissional para estruturar a cultura de QA na Local Eats. Você será o braço direito do desenvolvimento, garantindo que nossas entregas sejam sólidas e sem bugs para os nossos usuários e restaurantes parceiros.
+Buscamos um QA para liderar a cultura de testes na Local Eats. Você será responsável por garantir que nossos clientes consigam pedir sua comida favorita sem falhas no sistema.
 
 **Principais Responsabilidades:**
-* Planejar e executar planos de teste para Web e Mobile.
-* Documentar defeitos e colaborar com os desenvolvedores na correção.
-* Apoiar na definição de critérios de qualidade para as novas funcionalidades.
+* Planejar e executar testes em aplicações Web e Mobile.
+* Documentar e rastrear bugs críticos (como duplicidade de pedidos).
+* Colaborar na definição de critérios de aceite para novas funcionalidades.
 
 **Requisitos:**
-* **Obrigatórios:** Conhecimento em metodologias de teste; Capacidade analítica para identificar falhas de lógica.
-* **Desejáveis:** Experiência com testes de API (Postman/Insomnia); Noções de automação.
-* **Diferencial:** Certificação ISTQB-CTFL.
+* **Obrigatórios:** Conhecimento em metodologias de teste de software; Boa comunicação e senso crítico.
+* **Desejáveis:** Experiência com Postman/Insomnia; Noções de automação de testes.
+* **Certificações:** ISTQB-CTFL (Desejável).
 
 ---
 
@@ -52,13 +69,13 @@ Buscamos um profissional para estruturar a cultura de QA na Local Eats. Você se
 **Empresa:** Local Eats | **Local:** Remoto
 
 **Sobre a vaga:**
-Buscamos alguém que valorize código bem escrito e testado. Sua missão será garantir que a lógica por trás dos pedidos na Local Eats seja infalível e escalável.
+Procuramos um desenvolvedor preocupado com a robustez e a lógica do sistema. Sua missão é construir APIs seguras e eficientes.
 
 **Principais Responsabilidades:**
-* Desenvolver APIs robustas seguindo boas práticas de arquitetura.
-* Implementar testes unitários para as regras de negócio.
-* Investigar e resolver problemas de concorrência e persistência de dados.
+* Desenvolver funcionalidades seguindo padrões de código limpo.
+* Escrever e manter testes unitários para as regras de negócio.
+* Resolver problemas de concorrência e integridade de dados.
 
 **Requisitos:**
-* **Obrigatórios:** Lógica de programação sólida; Experiência com linguagens modernas (Node.js, Python ou similar); SQL.
-* **Desejáveis:** Conhecimento em Docker e processos de CI/CD.
+* **Obrigatórios:** Lógica de programação sólida; Experiência com Node.js, Python ou C#; SQL.
+* **Desejáveis:** Conhecimento em Docker e CI/CD; Experiência em sistemas de alta demanda.
