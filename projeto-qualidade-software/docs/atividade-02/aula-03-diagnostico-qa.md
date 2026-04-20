@@ -58,3 +58,50 @@ A qualidade de software deve ser entendida como uma **responsabilidade compartil
 * **O Papel do Especialista em QA:** Embora todos sejam responsáveis, o papel do QA (Analista de Qualidade) é fundamental como um **facilitador**. Ele não é o "único que testa", mas sim quem define as estratégias, ferramentas e padrões de qualidade que a equipe deve seguir para evitar que o erro aconteça.
 * **Cultura de Prevenção:** Quando a responsabilidade é compartilhada, o foco muda de "encontrar bugs" para "prevenir bugs". Isso significa que o desenvolvedor testa sua própria lógica, o analista revisa as regras de negócio e o QA valida a experiência final, garantindo que o sistema entregue valor real ao usuário.
 
+---
+
+## 2. Proposta de Organização da Qualidade
+
+### 2.1 Definição de papéis da equipe
+
+Para garantir que a Local Eats entregue um produto confiável, a equipe deve ser estruturada com os seguintes papéis e responsabilidades:
+
+* **Analista de Qualidade (QA):**
+    * **Principais responsabilidades:** Planejar e executar testes (manuais e automatizados), documentar bugs, definir planos de teste e validar se a funcionalidade atende aos requisitos antes do lançamento.
+    * **Relação com a qualidade:** Atua como o guardião dos processos, garantindo que nenhum código chegue ao usuário sem passar por uma validação técnica e funcional rigorosa.
+
+* **Desenvolvedor:**
+    * **Principais responsabilidades:** Implementar as funcionalidades do sistema, realizar testes unitários e de integração, e corrigir os defeitos reportados pelo QA.
+    * **Relação com a qualidade:** Responsável pela **qualidade intrínseca** do código. Deve garantir que o que foi construído é tecnicamente sólido e não gera regressões (quebras) em outras partes do sistema.
+
+* **Analista de Sistemas:**
+    * **Principais responsabilidades:** Levantar e detalhar os requisitos de negócio com os lojistas e clientes, criando documentações claras para a equipe técnica.
+    * **Relação com a qualidade:** Garante a **qualidade de design/requisitos**. Se o requisito estiver bem escrito e sem ambiguidades, evita-se que a equipe desenvolva a funcionalidade errada (como o erro de pedidos duplicados).
+
+* **DevOps:**
+    * **Principais responsabilidades:** Gerenciar os ambientes de desenvolvimento e produção, automatizar o processo de deploy (entrega) e monitorar a performance do servidor em tempo real.
+    * **Relação com a qualidade:** Garante a **qualidade de infraestrutura e disponibilidade**. Assegura que o sistema não fique lento em horários de pico e que as atualizações sejam feitas de forma segura, sem tirar o app do ar.
+
+### 2.2 Descrição dos papéis
+
+Abaixo estão detalhados os papéis propostos para a reestruturação da Local Eats:
+
+| Papel | Responsabilidades principais | Relação com a qualidade |
+| :--- | :--- | :--- |
+| **QA / Analista de Qualidade** | Planejar e executar testes, gerir o ciclo de vida de bugs e validar critérios de aceite. | Atua como o filtro final, garantindo que o produto atenda às expectativas do usuário. |
+| **Desenvolvedor** | Codificar funcionalidades, realizar testes unitários e de integração e corrigir defeitos. | Responsável pela qualidade técnica e por garantir que o código seja sólido e sem regressões. |
+| **Analista de Sistemas** | Levantar requisitos, detalhar regras de negócio e validar fluxos com os stakeholders. | Garante a "Qualidade de Design", evitando erros de lógica antes mesmo do código começar. |
+| **DevOps** | Automatizar o pipeline de deploy (CI/CD) e monitorar a performance da infraestrutura. | Assegura a qualidade de disponibilidade, garantindo que o sistema suporte picos de acesso. |
+
+---
+
+## 3. Práticas de QA Sugeridas
+
+Para melhorar a estabilidade do sistema e a confiança dos usuários, sugiro a adoção das seguintes práticas de Qualidade de Software (QA):
+
+1.  **Revisão de Requisitos (Static Testing):** Antes de iniciar a codificação de qualquer funcionalidade, o Analista e o QA devem revisar a regra de negócio. Isso evita erros de lógica, como o de pedidos duplicados, antes mesmo de se tornarem código.
+2.  **Gestão Centralizada de Defeitos:** Utilizar uma ferramenta (ex: GitHub Issues) para registrar cada bug encontrado. Cada registro deve conter: passos para reproduzir, comportamento esperado, comportamento atual e o nível de severidade.
+3.  **Testes de Fumaça (Smoke Tests):** Executar um roteiro rápido de testes manuais ou automatizados nas funções críticas (Login, Busca de Restaurante e Finalização de Pedido) sempre que uma nova versão for publicada, garantindo que o "coração" do app não pare de funcionar.
+4.  **Testes Exploratórios:** Reservar um tempo para navegar livremente pelo sistema como se fosse um usuário final. Isso ajuda a identificar problemas de usabilidade, telas confusas e falhas em diferentes modelos de smartphone que não foram previstos nos planos de teste.
+5.  **Criação de Critérios de Aceite:** Definir condições claras que uma tarefa deve cumprir para ser considerada "concluída" (Done). Por exemplo: "O sistema não deve permitir que o mesmo pedido seja processado duas vezes em menos de 1 minuto".
+
