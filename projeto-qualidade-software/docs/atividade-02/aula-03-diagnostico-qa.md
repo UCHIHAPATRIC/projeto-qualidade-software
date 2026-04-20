@@ -6,14 +6,17 @@
 
 ---
 
+# Diagnóstico de Qualidade – Startup Local Eats
+
 ## 1. Diagnóstico da Situação Atual
 
-A startup **Local Eats** enfrenta um cenário de "caos operacional" típico de crescimentos acelerados sem processos de validação. A análise do contexto revela falhas críticas de **Confiabilidade** e **Adequação Funcional**.
+### 1.1 Papéis atuais identificados
 
-* **Identificação de Papéis Atuais:** Provavelmente a equipe conta apenas com Desenvolvedores e um Gerente de Produto, sem uma figura dedicada à qualidade.
-* **Responsabilidade Atual:** A qualidade é tratada de forma reativa e nebulosa; não há um "dono" do processo de teste, o que permite que erros graves (como pedidos duplicados) cheguem ao usuário final.
-* **Impactos Negativos:** Quando as responsabilidades não estão claras, ocorre o "efeito espectador" (todos acham que o outro testou), gerando retrabalho, perda de credibilidade com os lojistas e frustração dos clientes.
-* **Conclusão:** A qualidade deve ser uma **responsabilidade compartilhada** por toda a equipe, com o QA atuando como facilitador e estrategista, e não apenas como um "executor de testes" ao final do processo.
+Com base na análise do cenário da startup, os papéis que provavelmente compõem a equipa atual são:
+
+* **Desenvolvedores (Web e Mobile):** Responsáveis pela construção técnica do MVP. Devido ao prazo apertado, focam-se na entrega de código, acumulando funções de teste e implementação sem um processo formal.
+* **Gerente de Produto (ou Proprietário da Startup):** Define as funcionalidades e prioriza o lançamento para eventos gastronómicos, focando-se mais no prazo de mercado do que na estabilidade técnica.
+* **Analista de Sistemas / Requisitos:** Atua na tradução das necessidades dos comerciantes para a equipa técnica, mas a pressa na entrega sugere que o refinamento de cenários de exceção (como duplicidade de pedidos) não está a ser priorizado.
 
 ## 2. Papéis da Equipe
 
