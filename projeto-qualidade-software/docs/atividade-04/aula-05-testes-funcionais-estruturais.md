@@ -47,18 +47,24 @@ Aqui, focamos na estrutura lógica do código. Imaginamos como os algoritmos de 
 
 ---
 
-## 4. Comparação entre as Abordagens
+### 4. Comparação entre as abordagens
 
-| Característica | Teste Caixa-Preta (Funcional) | Teste Caixa-Branca (Estrutural) |
-| :--- | :--- | :--- |
-| **Foco principal** | Requisitos, experiência do usuário e saídas. | Lógica interna, fluxo de dados e caminhos de código. |
-| **Quem geralmente faz** | QA, Analista de Testes ou Usuário Final. | Desenvolvedor ou QA com perfil técnico. |
-| **Tipos de erros encontrados** | Funcionalidades faltando, erros de interface e falhas de usabilidade. | Caminhos lógicos não testados, erros de sintaxe, brechas de segurança e loops infinitos. |
+A principal diferença entre as duas visões está na base de informação utilizada para criar os testes. Na Caixa-preta, o ponto de partida são os requisitos e a documentação, ou seja, o que o sistema deve fazer para o usuário. Na Caixa-branca, o ponto de partida é o código-fonte e a arquitetura, focando em como o sistema foi construído internamente.
+
+**Caixa-preta: Foco na Conformidade**
+Esta abordagem serve para identificar se o sistema está entregando o que prometeu ao usuário final. É fundamental para encontrar erros de comportamento, falhas de usabilidade e funções que não operam como esperado na interface. No caso da LocalEats, é essa visão que detecta quando a busca por pizzarias retorna resultados de hamburguerias, afetando a confiança de quem usa o app.
+
+**Caixa-branca: Foco na Implementação**
+Esta visão serve para identificar se o sistema está saudável por dentro. É essencial para encontrar erros de engenharia, como brechas de segurança, algoritmos pesados que sobrecarregam a memória e caminhos lógicos que causam travamentos em modelos de celulares específicos. Na LocalEats, é esta abordagem que permite resolver a lentidão nos horários de pico, otimizando o código e as consultas ao banco de dados diretamente na fonte.
+
+Em resumo, a Caixa-preta garante que o sistema faz a coisa certa para o negócio, enquanto a Caixa-branca garante que o sistema faz essa coisa da forma correta e estável.
 
 ---
 
 ## 5. Reflexão no contexto do LocalEats
 
 No cenário atual da LocalEats, a abordagem de **Testes Caixa-Preta** parece ser a mais urgente para identificar por que o usuário está recebendo resultados incorretos, pois foca diretamente na dor do cliente. No entanto, para resolver os problemas de **lentidão em horários de pico**, a abordagem de **Testes Caixa-Branca** é indispensável para analisar a eficiência dos algoritmos e das conexões com o banco de dados.
+
+--- 
 
 **Conclusão:** Apenas uma abordagem não seria suficiente. Se usarmos apenas a Caixa-Preta, saberemos *que* o sistema está errado, mas não saberemos *por que* (lógica ruim ou erro de banco). Se usarmos apenas a Caixa-Branca, teremos um código tecnicamente perfeito, mas que pode não ser o que o usuário realmente precisa ou deseja. A integração das duas é o que garante a qualidade total.
