@@ -1,10 +1,5 @@
 # Estratégia Inicial de Testes – LocalEats
 
-**Estudante:** Patric Morales Taborda  
-**Disciplina:** Qualidade de Software  
-
----
-
 ## 1. Funcionalidades Principais
 
 Para esta estratégia inicial, selecionei as funcionalidades vitais para a operação do sistema:
