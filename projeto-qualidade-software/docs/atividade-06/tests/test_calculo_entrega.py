@@ -73,3 +73,5 @@ def test_deve_lancar_erro_quando_distancia_for_negativa():
         calcular_taxa_entrega(distancia)
     
     assert str(exc_info.value) == "A distância não pode ser negativa"
+
+

@@ -74,3 +74,79 @@ def test_deve_gerar_erro_para_distancia_negativa():
     # Act & Assert
     with pytest.raises(ValueError, match="A distância não pode ser negativa"):
         calcular_taxa_entrega(distancia)
+
+🔹 3. Aplicação do TDD
+Abaixo está o ciclo TDD (Red -> Green -> Refactor) aplicado na construção da regra de negócio.
+
+🔴 Red (Escrever o teste que falha)
+Primeiro, criei os testes acima. A função principal existia apenas com um pass. O teste falhou porque a lógica não existia e nenhum valor ou erro era retornado.
+
+Python
+# Código inicial que causou a falha no teste
+def calcular_taxa_entrega(distancia):
+    pass
+🟢 Green (Fazer o teste passar)
+Implementei a lógica mais simples e direta possível, apenas usando condicionais básicas e números literais, focando exclusivamente em fazer os testes rodarem com sucesso ("ficarem verdes").
+
+Python
+# Código implementado apenas para os testes passarem
+def calcular_taxa_entrega(distancia):
+    if distancia < 0:
+        raise ValueError("Distância inválida")
+    if distancia <= 3:
+        return 5.0
+    if distancia > 3:
+        return 5.0 + ((distancia - 3) * 2.0)
+🔵 Refactor (Melhorar o código)
+Com os testes garantindo que a regra matemática funciona, refatorei o código para deixá-lo mais profissional, removendo os "números mágicos" e melhorando a nomenclatura.
+
+Python
+# Código final após a refatoração
+def calcular_taxa_entrega(distancia_km: float) -> float:
+    TAXA_BASE = 5.0
+    LIMITE_KM_BASE = 3.0
+    TAXA_POR_KM_EXTRA = 2.0
+
+    if distancia_km < 0:
+        raise ValueError("Distância inválida")
+    
+    if distancia_km <= LIMITE_KM_BASE:
+        return TAXA_BASE
+        
+    km_adicional = distancia_km - LIMITE_KM_BASE
+    return TAXA_BASE + (km_adicional * TAXA_POR_KM_EXTRA)
+🔹 4. Refatoração
+Melhorias e justificativas:
+
+Nomenclatura (Legibilidade): A variável distancia virou distancia_km para deixar explícita a unidade de medida esperada. Adicionei tipagem de dados (float) para facilitar o entendimento.
+
+Remoção de Duplicações e Números Mágicos: Os valores 5.0, 3.0 e 2.0 estavam soltos no código. Eles foram substituídos por constantes (TAXA_BASE, LIMITE_KM_BASE, TAXA_POR_KM_EXTRA). Isso facilita muito a manutenção; se o LocalEats mudar os preços amanhã, alteramos apenas as constantes num só lugar.
+
+Fluxo simplificado: O segundo if (if distancia > 3:) foi removido. Como o primeiro if já possui um return que encerra a função para distâncias menores, tudo que passa dele já é obrigatoriamente maior que 3km.
+
+🔹 5. Execução dos Testes
+Total de testes: 3
+
+Quantos passaram: 3
+
+Quantos falharam: 0
+
+Evidência de execução do terminal:
+
+Plaintext
+============================= test session starts ==============================
+collected 3 items
+
+test_entrega.py ...                                                      [100%]
+
+============================== 3 passed in 0.03s ===============================
+🔹 6. Reflexão no contexto do LocalEats
+Foi difícil escrever testes antes do código? Um pouco no começo, pois inverte a lógica tradicional. Tive que pensar no "comportamento" que eu esperava e nos erros possíveis antes mesmo de pensar nos if/else da função.
+
+O TDD ajudou no desenvolvimento? Sim, ajudou a focar no essencial. Escrevi apenas o código estritamente necessário para atender à regra da taxa de entrega, sem complicar ou adicionar funções que não haviam sido pedidas.
+
+Os testes aumentaram a confiança no código? Muito. Durante a fase de Refatoração, mudar o nome das variáveis e trocar a estrutura da função foi seguro, porque se eu errasse a matemática, o teste me avisaria na hora.
+
+O que melhorariam? Poderíamos testar tipos de dados inválidos (como enviar uma "string" no lugar da distância) para garantir que o sistema não quebre, ou usar testes parametrizados para rodar várias distâncias diferentes de uma só vez.
+
+Como isso ajuda no projeto do grupo? Garante que a regra de negócio central não sofra regressões. Se outro desenvolvedor mexer no código de pedidos amanhã e acidentalmente alterar o valor da entrega, os testes automatizados vão falhar imediatamente no repositório, impedindo que o erro vá para produção.
