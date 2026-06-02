@@ -1,6 +1,7 @@
 # Atividade PBL – Aula 9: Testes Unitários Automatizados e TDD – LocalEats
 
-**Integrante:** Patric
+**Integrante:** Patric Morales Taborda
+
 **Contexto:** Evolução da abordagem de QA do sistema LocalEats de testes manuais para automação no código utilizando a prática de TDD.
 
 ---
