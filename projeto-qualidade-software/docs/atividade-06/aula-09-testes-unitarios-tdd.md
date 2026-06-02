@@ -145,14 +145,7 @@ def calcular_taxa_entrega(distancia_km: float) -> float:
 
 **Evidência de execução do terminal:**
 
-```text
-============================= test session starts ==============================
-collected 3 items
-
-test_entrega.py ...                                                      [100%]
-
-============================== 3 passed in 0.03s ===============================
-```
+![alt text](image.png)
 
 ---
 
