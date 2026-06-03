@@ -120,13 +120,13 @@ def test_login_com_sucesso_pom(page):
 
 ## 🔹 5. Execução dos testes
 
-* **Total de testes:** 1
-* **Quantos passaram:** 1
+* **Total de testes:** 2
+* **Quantos passaram:** 2
 * **Quantos falharam:** 0
 
 **Evidência de execução (Terminal):**
 
-![alt text](image.png)
+![Evidência dos testes](image.png)
 ---
 
 ## 🔹 6. Análise crítica dos testes
