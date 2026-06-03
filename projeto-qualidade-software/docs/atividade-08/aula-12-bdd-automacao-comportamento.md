@@ -96,16 +96,17 @@ def validar_busca_vazia(page: Page):
 
 ## 🔹 4. Organização do projeto
 
-O projeto foi organizado separando estritamente os requisitos de negócio da implementação técnica e adotando os padrões mais modernos de configuração Python (TOML):
+O projeto foi organizado separando estritamente os requisitos de negócio da implementação técnica, além de manter os arquivos de documentação e evidências na raiz da pasta da atividade:
 
 ```text
-projeto/
+atividade-08/
 │
 ├── features/
 │   └── busca_restaurantes.feature     
 ├── tests/
-│   └── test_busca_bdd.py             
-└── pyproject.toml                     
+│   └── test_busca_bdd.py              
+├── aula-12-bdd-automacao-comportamento.md
+└── image.png
 ```
 
 ---
@@ -118,7 +119,7 @@ projeto/
 
 **Evidência da execução:**
 
-![Evidência dos testes BDD](evidencia-bdd.png)
+![Evidência dos testes BDD](image.png)
 
 ---
 
