@@ -1,3 +1,4 @@
+#python -m pytest tests/test_login.py -v --headed --slowmo 1000
 class LoginPage:
     def __init__(self, page):
         self.page = page

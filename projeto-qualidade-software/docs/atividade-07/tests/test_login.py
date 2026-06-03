@@ -1,3 +1,4 @@
+#python -m pytest tests/test_login.py -v --headed
 from pages.login_page import LoginPage
 from playwright.sync_api import expect
 
