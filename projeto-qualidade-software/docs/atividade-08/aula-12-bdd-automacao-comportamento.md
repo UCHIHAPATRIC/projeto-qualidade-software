@@ -102,10 +102,10 @@ O projeto foi organizado separando estritamente os requisitos de negócio da imp
 projeto/
 │
 ├── features/
-│   └── busca_restaurantes.feature     # Regras de negócio legíveis
+│   └── busca_restaurantes.feature     
 ├── tests/
-│   └── test_busca_bdd.py              # Implementação da automação técnica
-└── pyproject.toml                     # Configuração moderna de caminhos do runner
+│   └── test_busca_bdd.py             
+└── pyproject.toml                     
 ```
 
 ---
