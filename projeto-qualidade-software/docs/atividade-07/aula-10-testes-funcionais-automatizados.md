@@ -11,10 +11,10 @@
 **🔐 1. Login de usuário**
 
 * **O que faz:** Permite autenticar um usuário no sistema LocalEats.
-* **Problema que resolve:** Garante o acesso seguro às funcionalidades privadas do sistema (como finalizar pedidos e ver histórico).
-* **Importância:** É o fluxo crítico de entrada. Se o login falhar, o usuário não consegue consumir o serviço, impactando diretamente o negócio.
+* **Problema que resolve:** Garante o acesso seguro às funcionalidades privadas do sistema.
+* **Importância:** É o fluxo crítico de entrada. Se o login falhar, o usuário não consegue consumir o serviço.
 * **Cenários esperados:**
-    * Login com credenciais válidas -> Redirecionamento para a home com sucesso.
+    * Login com credenciais válidas -> Redirecionamento com sucesso.
     * Login com credenciais inválidas -> Exibição de mensagem de erro amigável.
     * Tentativa de login com campos vazios -> Validação em tela.
 
@@ -24,31 +24,28 @@
 
 O código inicial foi gerado através do comando `playwright codegen https://local-eats-unisenac.vercel.app/`.
 
-**Código bruto gerado (exemplo do comportamento da ferramenta):**
+**Código bruto gerado (trecho analisado):**
 
 ```python
-from playwright.sync_api import Page, expect
-
-def test_codegen_login(page: Page) -> None:
-    page.goto("[https://local-eats-unisenac.vercel.app/](https://local-eats-unisenac.vercel.app/)")
-    page.locator("div:nth-child(2) > button").click() # Clique frágil
-    page.get_by_placeholder("Digite seu e-mail").click()
-    page.get_by_placeholder("Digite seu e-mail").fill("teste@email.com")
-    page.get_by_placeholder("Digite sua senha").click()
-    page.get_by_placeholder("Digite sua senha").fill("123456")
+    page.goto("[https://local-eats-unisenac.vercel.app/static/login.html](https://local-eats-unisenac.vercel.app/static/login.html)")
+    page.locator("#loginForm").get_by_role("button", name="Entrar").click()
+    page.get_by_role("textbox", name="teste@teste.com").click()
     page.get_by_role("button", name="Entrar").click()
-    expect(page.locator("text=Bem-vindo")).to_be_visible()
+    page.get_by_role("textbox", name="teste@teste.com").dblclick()
+    page.get_by_text("E-mail Senha Entrar").click()
+    page.locator("#loginForm").get_by_text("Senha").click()
+    page.get_by_role("textbox", name="Sua senha secreta").click()
 ```
 
 **Análise do Codegen:**
-* **O que fez bem:** Mapeou o fluxo do usuário muito rápido, capturando a sequência exata de cliques e preenchimentos. Gerou o esqueleto da automação em segundos.
-* **O que gerou de desnecessário/frágil:** Gravou cliques desnecessários antes do `fill()` nos campos de input. Além disso, gerou seletores muito frágeis e baseados em estrutura, como `page.locator("div:nth-child(2) > button")`. Se um desenvolvedor adicionar uma nova `div` na tela, o teste quebra imediatamente.
+* **O que fez bem:** Mapeou o link direto da página de login (`/static/login.html`) e identificou os seletores reais usados no formulário, como `name="teste@teste.com"`.
+* **O que gerou de desnecessário/frágil:** O código gravou diversas ações inúteis causadas por movimentos normais do mouse, como cliques duplos (`dblclick()`) e cliques em textos da interface. Foi necessário limpar isso e trocar os `.click()` acidentais em campos de texto por comandos `.fill()`.
 
 ---
 
 ## 🔹 3. Implementação do teste com Pytest (Primeira Versão)
 
-Antes da arquitetura final, o teste foi limpo e transformado em um teste funcional utilizando Pytest e seletores mais robustos.
+Antes da arquitetura final, o teste foi limpo e transformado em um teste funcional executável, removendo a sujeira do gravador.
 
 **Arquivo: `tests/test_login_simples.py`**
 
@@ -57,16 +54,17 @@ import pytest
 from playwright.sync_api import Page, expect
 
 def test_login_com_sucesso(page: Page):
-    # 1. Acesso
-    page.goto("[https://local-eats-unisenac.vercel.app/](https://local-eats-unisenac.vercel.app/)")
+    # 1. Acesso direto
+    page.goto("[https://local-eats-unisenac.vercel.app/static/login.html](https://local-eats-unisenac.vercel.app/static/login.html)")
     
-    # 2. Interação
-    page.get_by_role("button", name="Login").click()
-    page.get_by_label("Email").fill("teste@email.com")
-    page.get_by_label("Senha").fill("123456")
-    page.get_by_role("button", name="Entrar").click()
+    # 2. Interação baseada nos seletores mapeados pelo Codegen
+    page.get_by_role("textbox", name="teste@teste.com").fill("teste@email.com")
+    page.get_by_role("textbox", name="Sua senha secreta").fill("123456")
+    
+    # 3. Confirmação ligada estritamente ao formulário de login
+    page.locator("#loginForm").get_by_role("button", name="Entrar").click()
 
-    # 3. Validação (Assertion)
+    # 4. Validação (Assertion)
     expect(page.get_by_text("Bem-vindo")).to_be_visible()
 ```
 
@@ -74,11 +72,7 @@ def test_login_com_sucesso(page: Page):
 
 ## 🔹 4. Refatoração com Page Object Model (POM)
 
-Para garantir que o código seja legível e fácil de manter (evitando que a mudança em uma tela quebre dezenas de testes), o fluxo foi refatorado utilizando o padrão Page Object Model.
-
-**Estrutura criada:**
-* `pages/login_page.py` (Isola os seletores e ações da tela)
-* `tests/test_login.py` (Contém apenas a lógica e validação do teste)
+Para garantir que o código seja legível e fácil de manter, o fluxo foi refatorado utilizando o padrão Page Object Model.
 
 **Arquivo: `pages/login_page.py`**
 
@@ -87,17 +81,15 @@ class LoginPage:
     def __init__(self, page):
         self.page = page
         # Mapeamento de elementos (Locators)
-        self.botao_abrir_login = page.get_by_role("button", name="Login")
-        self.input_email = page.get_by_label("Email")
-        self.input_senha = page.get_by_label("Senha")
-        self.botao_entrar = page.get_by_role("button", name="Entrar")
+        self.input_email = page.get_by_role("textbox", name="teste@teste.com")
+        self.input_senha = page.get_by_role("textbox", name="Sua senha secreta")
+        self.botao_entrar = page.locator("#loginForm").get_by_role("button", name="Entrar")
         self.mensagem_boas_vindas = page.get_by_text("Bem-vindo")
 
     def acessar(self):
-        self.page.goto("[https://local-eats-unisenac.vercel.app/](https://local-eats-unisenac.vercel.app/)")
+        self.page.goto("[https://local-eats-unisenac.vercel.app/static/login.html](https://local-eats-unisenac.vercel.app/static/login.html)")
 
     def realizar_login(self, email, senha):
-        self.botao_abrir_login.click()
         self.input_email.fill(email)
         self.input_senha.fill(senha)
         self.botao_entrar.click()
@@ -134,33 +126,22 @@ def test_login_com_sucesso_pom(page):
 
 **Evidência de execução (Terminal):**
 
-*(Cole aqui a imagem do print do seu terminal rodando o teste no VS Code)*
-
-```text
-============================= test session starts ==============================
-collected 1 item
-
-tests\test_login.py .                                                    [100%]
-
-============================== 1 passed in 2.85s ===============================
-```
-
+![alt text](image.png)
 ---
 
 ## 🔹 6. Análise crítica dos testes
 
-* **O teste quebrou em algum momento? Por quê?** Sim, durante as primeiras tentativas com o código do Codegen. O teste quebrou porque o Playwright tentou interagir com um seletor CSS muito específico (`div > span > button`) que o frontend renderizou de forma diferente ao carregar a página.
-* **Quais seletores foram mais difíceis?** Botões e modais que não possuíam atributos de acessibilidade explícitos (como `aria-label`).
-* **O Codegen ajudou ou gerou problemas?** O Codegen é excelente para mapear a jornada rapidamente, mas é uma armadilha se usado de forma bruta. Ele gerou código frágil. Foi necessário reescrever os seletores utilizando boas práticas (`get_by_role` e `get_by_label`).
-* **O teste é confiável? Por quê?** Sim, a versão refatorada é confiável. Ao utilizar `get_by_label`, o teste se baseia na experiência do usuário e na acessibilidade da página, não na estrutura do HTML ou classes CSS.
-* **O que tornaria o teste mais robusto?** A implementação de seletores `data-testid` dedicados apenas para automação no código fonte do frontend do LocalEats.
-* **Quais são os riscos de manutenção?** Se a equipe de UI/UX alterar radicalmente os nomes dos botões (ex: mudar de "Entrar" para "Acessar Conta"), o teste quebrará. Porém, com o POM, eu só precisarei corrigir isso em um único arquivo (`login_page.py`), mitigando o risco de retrabalho.
+* **O teste quebrou em algum momento? Por quê?** Sim. Na primeira tentativa, ao buscar um botão rígido chamado "Login" usando o seletor `get_by_role`, o Playwright deu erro de *Timeout*. Isso aconteceu porque a interface real não possuía esse elemento, exigindo que eu analisasse o código do Codegen para encontrar a URL `/static/login.html` e os nomes corretos dos campos.
+* **Quais seletores foram mais difíceis?** Entender que os campos de texto usavam o *placeholder* ("teste@teste.com") como atributo de acessibilidade no front-end.
+* **O Codegen ajudou ou gerou problemas?** O Codegen foi fundamental para mapear os seletores reais ("Sua senha secreta", formulário "#loginForm"), mas a gravação bruta trouxe inúmeros cliques duplos em locais vazios. O código final exige limpeza humana.
+* **O teste é confiável? Por quê?** Sim, a versão refatorada usa seletores por Papel (`role`) e ID único, ignorando estruturas frágeis de CSS (como `div > div > button`).
+* **O que tornaria o teste mais robusto?** A implementação de seletores `data-testid` dedicados à automação no front-end do LocalEats.
+* **Quais são os riscos de manutenção?** Alterações no *placeholder* dos campos (ex: mudar "teste@teste.com" para "Digite seu e-mail") quebrarão o teste. O POM isola esse risco no arquivo `login_page.py`.
 
 ---
 
 ## 🔹 7. Reflexão no contexto do LocalEats
 
-* **Testes automatizados substituem testes manuais?** Não substituem. A automação garante que o que funcionava ontem continua funcionando hoje (testes de regressão). O teste manual (exploratório) continua vital para avaliar a usabilidade, o layout e encontrar falhas não mapeadas.
-* **Vale a pena automatizar todos os fluxos?** Não. A automação tem custo de criação e manutenção. O ideal é automatizar os fluxos críticos de negócio (Login, Adicionar ao Carrinho, Checkout).
-* **Qual tipo de teste deve ser priorizado?** Baseado na Pirâmide de Testes, devemos ter uma base massiva de testes unitários automatizados (rápidos e baratos), uma camada intermediária de testes de integração, e no topo, uma quantidade estratégica e menor de testes E2E (UI), pois são mais lentos e custosos de manter.
-* **Como isso ajuda no projeto do grupo?** Cria uma esteira de integração contínua (CI) confiável. Ninguém mais no grupo precisará preencher formulários de login dezenas de vezes por dia para verificar se o sistema está no ar após um novo deploy. A automação faz isso por nós.
+* **Testes automatizados substituem testes manuais?** Não. Eles apenas executam fluxos conhecidos repetidamente para evitar regressão. Testes manuais continuam vitais para usabilidade.
+* **Vale a pena automatizar todos os fluxos?** Não, o foco deve estar nos fluxos críticos do negócio (Login e Pedidos) devido ao custo de manutenção.
+* **Como isso ajuda no projeto do grupo?** Valida os deploys do LocalEats instantaneamente. Saberemos na mesma hora se uma alteração no código quebrou o acesso dos usuários.
